@@ -2,7 +2,12 @@
     <head>
         <!-- Required includes -->
         <script type="text/javascript" src="coui://uiresources/js/crayta.js"></script>
+
+        <!-- craytaface mock system -->
         <script type="text/javascript" src="./craytaface.js"></script>
+        <link rel="stylesheet" type="text/css" href="./gameface-mock.css"/>
+        <!-- / craytaface mock system -->
+
         <style type="text/css">
            body {
            	width: 100vw;
@@ -23,11 +28,10 @@
     			  }
 
         </style>
-        <link rel="stylesheet" type="text/css" href="./gameface-mock.css"/>
+
     </head>
 
     <body data-bind-style-background-color="{{data.backgroundColor}}">
-        <!-- YOUR HTML CODE HERE -->
         <div class="number" data-bind-value="{{data.seconds}}">
         </div>
 
