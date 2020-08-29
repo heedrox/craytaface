@@ -9,9 +9,15 @@
         <!-- / craytaface mock system -->
 
         <style type="text/css">
+        @font-face {
+            font-family: 'LuckiestGuy';
+            src: url('https://content.crayta.com/fonts/LuckiestGuy-Regular.ttf');
+            font-weight: 400;
+          }
            body {
            	width: 100vw;
            	height: 100vh;
+            font-family: 'LuckiestGuy';
             }
 
             .number {
@@ -47,6 +53,8 @@
                 engine.updateWholeModel(data);
                 engine.synchronizeModels();
             });
+
+            
         </script>
     </body>
 </html>
