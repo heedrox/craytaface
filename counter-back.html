@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <!-- Required includes -->
+        <script type="text/javascript" src="coui://uiresources/js/crayta.js"></script>
+        <script type="text/javascript">
+          const synchronizeModels = () => {
+            (() => {
+              const elements = document.querySelectorAll("[data-bind-value]");
+              elements.forEach(x => {
+                const expresion = x.getAttribute("data-bind-value");
+                x.innerText = eval(expresion);
+              })
+            })();
+
+            (() => {
+              const elements = document.querySelectorAll("[data-bind-style-background-color]");
+              elements.forEach(x => {
+                const expresion = x.getAttribute("data-bind-style-background-color");
+                x.style.backgroundColor = eval(expresion);
+              })
+            })();
+          };
+          window.onload = synchronizeModels;
+          window.engine = {
+            on: (funcName, func) => { window[funcName] = func },
+            createJSModel: (modelName, value) => { window[modelName] = value },
+            updateWholeModel: (object) => {},
+            synchronizeModels: synchronizeModels
+          }
+          window.craytaFace = {
+            callFunction: (funcName, ...vars) => window[funcName](vars),
+          };
+        </script>
+        <style type="text/css">
+           body {
+           	width: 100vw;
+           	height: 100vh;
+            }
+
+            .number {
+            	margin-top: 25vh;
+            	text-align: center;
+                font-size: 50vh;
+                color: rgb(255, 255, 255);
+                animation-name: zoomIn;
+  			        animation-duration: 3s;
+            }
+            @keyframes zoomIn {
+  			     from {  font-size: 0vh;  }
+  			     to   {  font-size: 50vh; }
+    			  }
+
+        </style>
+        <link rel="stylesheet" type="text/css" href="./gameface-mock.css"/>
+    </head>
+
+    <body data-bind-style-background-color="{{data.backgroundColor}}">
+        <!-- YOUR HTML CODE HERE -->
+        <div class="number" data-bind-value="{{data.seconds}}">
+        </div>
+
+        <script>
+            engine.createJSModel('data',
+            {
+                seconds: 5,
+                backgroundColor: "rgba(0,0,0,1)"
+            });
+
+            engine.on("setSeconds", function(seconds) {
+                data.seconds = seconds;
+                engine.updateWholeModel(data);
+                engine.synchronizeModels();
+            });
+        </script>
+    </body>
+</html>

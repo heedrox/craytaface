@@ -1,0 +1,74 @@
+<html>
+  <style>
+    @font-face {
+      font-family: 'LuckiestGuy';
+      src: url('./LuckiestGuy-Regular.ttf');
+      font-weight: 400;
+    }
+    body {
+      background-color; white;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .checks {
+      position: absolute;
+      top: 3vh;
+      left: 83vw;
+      font-family: 'LuckiestGuy';
+      font-size: 8vh;
+      white-space: nowrap;
+    }
+
+    .check-img {
+      height: 10vh;
+    }
+
+    .check-text {
+      position: relative;
+      top: -2vh;
+    }
+
+    .boxes {
+      position:relative;
+      top: 10vh;
+      width: 50vw;
+      height: 80vh;
+      border: solid 1px black;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .box {
+      width: 50%;
+      height: 50%;
+      outline: solid 2vh black;
+    }
+
+    .box-red { background-color: red; }
+    .box-green { background-color: green; }
+    .box-yellow { background-color: yellow; }
+    .box-blue { background-color: blue; }
+  </style>
+  <body>
+    <div class="container">
+      <div class="boxes">
+          <div class="box box-red"></div>
+          <div class="box box-green"></div>
+          <div class="box box-yellow"></div>
+          <div class="box box-blue"></div>
+      </div>
+    </div>
+    <div class="checks">
+      <span class="check-text">3 / 5</span> <img src="ok-fun.png" class="check-img"/>
+    </div>
+  </body>
+</html>

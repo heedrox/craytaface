@@ -1,0 +1,15 @@
+* {
+   box-sizing: border-box;
+}
+
+body,
+div {
+   display: flex;
+   flex-direction: column;
+}
+
+p,
+span {
+   display: flex;
+   flex-direction: row;
+}
