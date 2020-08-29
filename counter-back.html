@@ -2,35 +2,7 @@
     <head>
         <!-- Required includes -->
         <script type="text/javascript" src="coui://uiresources/js/crayta.js"></script>
-        <script type="text/javascript">
-          const synchronizeModels = () => {
-            (() => {
-              const elements = document.querySelectorAll("[data-bind-value]");
-              elements.forEach(x => {
-                const expresion = x.getAttribute("data-bind-value");
-                x.innerText = eval(expresion);
-              })
-            })();
-
-            (() => {
-              const elements = document.querySelectorAll("[data-bind-style-background-color]");
-              elements.forEach(x => {
-                const expresion = x.getAttribute("data-bind-style-background-color");
-                x.style.backgroundColor = eval(expresion);
-              })
-            })();
-          };
-          window.onload = synchronizeModels;
-          window.engine = {
-            on: (funcName, func) => { window[funcName] = func },
-            createJSModel: (modelName, value) => { window[modelName] = value },
-            updateWholeModel: (object) => {},
-            synchronizeModels: synchronizeModels
-          }
-          window.craytaFace = {
-            callFunction: (funcName, ...vars) => window[funcName](vars),
-          };
-        </script>
+        <script type="text/javascript" src="./craytaface.js"></script>
         <style type="text/css">
            body {
            	width: 100vw;
