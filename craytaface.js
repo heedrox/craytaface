@@ -7,7 +7,8 @@ const evaluateBindExpression = (expresion) => {
   const values = expresion.match(EXPRESION_REGEXP);
   values.forEach(v => {
     const realValue = eval(v.replaceAll("{", "").replaceAll("}", ""));
-    expresion = expresion.replaceAll(v, realValue);
+    const formattedValue = typeof realValue === 'string' ? `'${realValue}'` : realValue;
+    expresion = expresion.replaceAll(v, formattedValue);
   });
   return eval(expresion);
 };
