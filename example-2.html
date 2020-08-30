@@ -1,0 +1,132 @@
+<html>
+<head>
+  <!-- Required includes -->
+  <script type="text/javascript" src="coui://uiresources/js/crayta.js"></script>
+  <!-- craytaface mock system -->
+  <script type="text/javascript" src="./craytaface.js"></script>
+  <link rel="stylesheet" type="text/css" href="./gameface-mock.css"/>
+  <!-- / craytaface mock system -->
+
+  <style type="text/css">
+    @font-face {
+      font-family: 'LuckiestGuy';
+      src: url('https://content.crayta.com/fonts/LuckiestGuy-Regular.ttf');
+      font-weight: 400;
+    }
+    body {
+      background-color: rgb(255,255,255);
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .container {
+      display: flex;
+      background-color: rgb(255,255,255);
+      flex-direction: row;
+      justify-content: center;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .checks {
+      position: absolute;
+      top: 3vh;
+      left: 70vw;
+      font-family: 'LuckiestGuy';
+      font-size: 12vh;
+      white-space: nowrap;
+    }
+
+    .check-img {
+      width: 10vw;
+      height: 10vh;
+    }
+
+    .check-text {
+      position: relative;
+      top: -2vh;
+    }
+
+    .boxes {
+      position:relative;
+      top: 10vh;
+      width: 50vw;
+      height: 80vh;
+      border: solid 2vh rgb(45, 45, 45);
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .box {
+      width: 50%;
+      height: 50%;
+      border: solid 2vh rgb(45, 45, 45);
+    }
+
+    .box-red { background-color: red; }
+    .box-green { background-color: green; }
+    .box-yellow { background-color: yellow; }
+    .box-blue { background-color: blue; }
+
+    .otherPlayer {
+      font-family: 'LuckiestGuy';
+      font-size: 20vh;
+      color: white;
+      text-shadow: 0.1rem 0.1rem black, -0.1rem -0.1rem black, 0.1rem -0.1rem black, -0.1rem 0.1rem black;
+      text-align: center;
+      position: relative;
+      top: 9vh;
+      left: 9vw;
+    }
+  </style>
+</head>
+
+<body>
+<!-- YOUR HTML CODE HERE -->
+<div class="container">
+  <div class="boxes">
+    <div class="box box-red"><span data-bind-if="{{data.currentColor}} == 1" data-bind-value="{{data.player}}" class="otherPlayer"></span></div>
+    <div class="box box-green"><span data-bind-if="{{data.currentColor}} == 2" data-bind-value="{{data.player}}" class="otherPlayer"></span></div>
+    <div class="box box-yellow"><span data-bind-if="{{data.currentColor}} == 3" data-bind-value="{{data.player}}" class="otherPlayer"></span></div>
+    <div class="box box-blue"><span data-bind-if="{{data.currentColor}} == 4" data-bind-value="{{data.player}}" class="otherPlayer"></span></div>
+  </div>
+</div>
+<div class="checks">
+  <span class="check-text">3 / 5</span> <img src="https://live.content.crayta.com/ui_image/df49abd4-d07b-40c9-aafb-d7921a19c62b_ui_image" class="check-img" alt="ok"/>
+</div>
+<script>
+/* YOUR JAVASCRIPT CODE HERE */
+
+engine.createJSModel('data',
+  {
+    player: 2,
+    rounds: [1, 2, 3, 4, 1],
+    numRound: 1,
+    currentColor: 1
+  });
+
+
+engine.on("sendStatus", function(player, rounds, numRound) {
+  data.player = player;
+  data.rounds = rounds;
+  data.numRound = numRound;
+  console.log(rounds);
+  data.currentColor = rounds[numRound-1];
+
+  engine.updateWholeModel(data);
+  engine.synchronizeModels();
+});
+
+
+/*
+* You can also trigger Lua functions in game scripts on this entity by using `callLua` via a Javascript function
+* (`event` is HTML-specific event data, which you can ignore)
+*/
+function exampleTriggerLuaFunction(event, data)
+{
+  // You can pass any data to the Lua function by adding it to the end
+  Crayta.callLua("myLuaFunction", data);
+}
+</script>
+</body>
+</html>

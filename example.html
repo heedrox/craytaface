@@ -9,36 +9,40 @@
         <!-- / craytaface mock system -->
 
         <style type="text/css">
-        @font-face {
-            font-family: 'LuckiestGuy';
-            src: url('https://content.crayta.com/fonts/LuckiestGuy-Regular.ttf');
-            font-weight: 400;
+          @font-face {
+              font-family: 'LuckiestGuy';
+              src: url('https://content.crayta.com/fonts/LuckiestGuy-Regular.ttf');
+              font-weight: 400;
           }
-           body {
-           	width: 100vw;
-           	height: 100vh;
-            font-family: 'LuckiestGuy';
-            }
 
-            .number {
+          body {
+           	  width: 100vw;
+           	  height: 100vh;
+              font-family: 'LuckiestGuy';
+          }
+
+          @keyframes zoomin {
+             from {  transform: scale(0, 0); }
+             to   {  transform: scale(100%, 100%); }
+          }
+          .number {
             	margin-top: 25vh;
             	text-align: center;
-                font-size: 50vh;
-                color: rgb(255, 255, 255);
-                animation-name: zoomIn;
-  			        animation-duration: 3s;
+              font-size: 50vh;
+              text-shadow: 2vh 2vh green;
+              color: rgb(255, 255, 255);
+              animation-name: zoomin;
+  			      animation-duration: 0.9s;
             }
-            @keyframes zoomIn {
-  			     from {  font-size: 0vh;  }
-  			     to   {  font-size: 50vh; }
-    			  }
+
+
 
         </style>
 
     </head>
 
     <body data-bind-style-background-color="{{data.backgroundColor}}">
-        <div class="number" data-bind-value="{{data.seconds}}">
+        <div id="counterNumber" class="number" data-bind-value="{{data.seconds}}">
         </div>
 
         <script>
@@ -52,9 +56,13 @@
                 data.seconds = seconds;
                 engine.updateWholeModel(data);
                 engine.synchronizeModels();
+                document.getElementById("counterNumber").style.display='none';
+                setTimeout(() => {
+                  document.getElementById("counterNumber").style.display='block';
+                }, 10)
             });
 
-            
+
         </script>
     </body>
 </html>
